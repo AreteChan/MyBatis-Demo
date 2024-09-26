@@ -1,5 +1,6 @@
 package com.example.mybatis_demo;
 
+import com.example.mybatis_demo.utils.JsonUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -16,21 +17,20 @@ class MybatisDemoApplicationTests {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-    private static final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void testSaveObject() throws JsonProcessingException {
         User user = new User("Jonny", "1234@mail.com");
 
         // 序列化
-        String userJSON = mapper.writeValueAsString(user);
+        String userJSON = JsonUtil.toJson(user);
         // 写入redis
         stringRedisTemplate.opsForValue().set("userObj", userJSON);
         // 读取redis
         String userJSON2 = stringRedisTemplate.opsForValue().get("userObj");
 
         // 反序列化
-        User user2 = mapper.readValue(userJSON2, User.class);
+        User user2 = JsonUtil.toObject(userJSON2, User.class);
         System.out.println(user2);
     }
 

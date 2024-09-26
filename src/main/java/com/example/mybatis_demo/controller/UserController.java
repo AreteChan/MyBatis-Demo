@@ -38,5 +38,10 @@ public class UserController {
         userService.deleteUserById(id);
         return Response.success(null, 204);
     }
+
+    @PostMapping("/login")
+    public Response<String> login(@RequestBody User user) {
+        return Response.success(userService.login(user));
+    }
 }
 

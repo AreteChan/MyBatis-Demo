@@ -8,6 +8,7 @@ import java.util.Map;
 
 public interface UserMapper {
     User selectUserById(Long id);
+    User selectUserByEmail(String email);
     void insertUser(User user);
 
     void updateUserById(@Param("id") Long id, @Param("updateBody") Map<String, Object> updateBody);

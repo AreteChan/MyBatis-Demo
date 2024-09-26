@@ -11,6 +11,11 @@
         SELECT * FROM users WHERE id = #{id}
     </select>
 
+    <select id="selectUserByEmail" resultMap="BaseResultMap">
+        SELECT * FROM users WHERE email = #{email}
+    </select>
+
+
     <insert id="insertUser" parameterType="com.example.mybatis_demo.model.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO users (name, password) VALUES (#{name}, #{password})
     </insert>
